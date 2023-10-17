@@ -1,14 +1,38 @@
 import os
 
+ALLOWED_HOSTS = []
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
 AUTH_USER_MODEL = 'users.User'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'jfl+!5g8ign2h!mqun7nwenb2aea@bj)&)0_bnc#ik!4ka76pe'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
@@ -21,6 +45,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
 ]
 
+LANGUAGE_CODE = 'ru'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -32,11 +58,11 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
-
 ROOT_URLCONF = 'abstract_user.urls'
+
+SECRET_KEY = 'jfl+!5g8ign2h!mqun7nwenb2aea@bj)&)0_bnc#ik!4ka76pe'
+
+STATIC_URL = '/static/'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
@@ -56,32 +82,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'abstract_user.wsgi.application'
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-LANGUAGE_CODE = 'ru'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -90,4 +90,4 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_URL = '/static/'
+WSGI_APPLICATION = 'abstract_user.wsgi.application'
